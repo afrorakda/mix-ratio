@@ -46,7 +46,6 @@
         h1 { font-size: 1.8rem; font-weight: 800; margin: 0; letter-spacing: -1px; }
         .subtitle { font-size: 0.85rem; color: var(--text-gray); font-weight: 600; margin-top: 4px; }
 
-        /* 単位切り替えチップ */
         .unit-selector {
             display: flex;
             justify-content: center;
@@ -61,6 +60,7 @@
             font-weight: 800;
             cursor: pointer;
             color: #888;
+            -webkit-tap-highlight-color: transparent;
         }
         .unit-chip.active {
             background: var(--main);
@@ -81,10 +81,11 @@
             justify-content: space-between;
         }
 
-        .input-wrapper { position: relative; }
+        .input-wrapper { position: relative; display: flex; align-items: center; }
         input {
             width: 100%;
             padding: 15px;
+            padding-right: 40px;
             border: 2px solid var(--accent);
             border-radius: var(--radius);
             background: var(--input-bg);
@@ -98,7 +99,26 @@
             opacity: 1 !important;
             user-select: text;
         }
-        input::placeholder { color: #ccc; -webkit-text-fill-color: #ccc; }
+        input::placeholder { color: #bbb; -webkit-text-fill-color: #bbb; }
+
+        .clr-btn {
+            position: absolute;
+            right: 10px;
+            width: 30px;
+            height: 30px;
+            background: rgba(0,0,0,0.05);
+            border: none;
+            border-radius: 50%;
+            color: #888;
+            font-size: 1.2rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .clr-btn.active { display: flex; }
 
         .ratio-visual {
             display: flex;
@@ -106,10 +126,10 @@
             gap: 10px;
             font-size: 1.2rem;
             font-weight: 800;
+            width: 100%;
         }
-        .ratio-fixed { color: #ccc; }
+        .ratio-fixed { color: #ccc; flex-shrink: 0; }
 
-        /* 結果エリア */
         .result-card {
             background: var(--input-bg);
             border-radius: var(--radius);
@@ -141,6 +161,13 @@
             font-size: 1.2rem;
             font-weight: 800;
             color: #ccc;
+        }
+        .tip {
+            font-size: 10px;
+            color: #aaa;
+            font-weight: 600;
+            margin-top: -5px;
+            margin-bottom: 10px;
         }
 
         .footer-btns { display: flex; gap: 10px; margin-bottom: 20px; }
@@ -189,7 +216,8 @@
     <div class="input-group">
         <div class="label">TOTAL VOLUME <span id="currentUnit1">ml</span></div>
         <div class="input-wrapper">
-            <input type="number" id="totalVol" placeholder="e.g. 500" inputmode="decimal" oninput="calc()">
+            <input type="number" id="totalVol" placeholder="e.g. 500" inputmode="decimal" oninput="updateUI()">
+            <button class="clr-btn" id="clrTotal" onclick="clearInput('totalVol')">×</button>
         </div>
     </div>
 
@@ -197,19 +225,24 @@
         <div class="label">RATIO (1 : X) <span>1 PART TO X PARTS</span></div>
         <div class="ratio-visual">
             <span class="ratio-fixed">1 :</span>
-            <input type="number" id="ratioX" placeholder="e.g. 10" inputmode="decimal" oninput="calc()">
+            <div class="input-wrapper" style="width:100%">
+                <input type="number" id="ratioX" placeholder="e.g. 10" inputmode="decimal" oninput="updateUI()">
+                <button class="clr-btn" id="clrRatio" onclick="clearInput('ratioX')">×</button>
+            </div>
         </div>
     </div>
 
+    <div class="tip">Add water first for less foam.</div>
+
     <div class="result-card">
         <div class="result-item">
-            <div class="result-val" id="resConc">0</div>
-            <div class="result-label">Concentrate (<span id="currentUnit2">ml</span>)</div>
+            <div class="result-val"><span id="approxWater" style="font-size: 1rem; vertical-align: middle; display: none;">Approx. </span><span id="resWater">0</span></div>
+            <div class="result-label">Water to add (<span id="currentUnit2">ml</span>)</div>
         </div>
         <div class="plus-sign">+</div>
         <div class="result-item">
-            <div class="result-val" id="resWater">0</div>
-            <div class="result-label">Water to add (<span id="currentUnit3">ml</span>)</div>
+            <div class="result-val"><span id="approxConc" style="font-size: 1rem; vertical-align: middle; display: none;">Approx. </span><span id="resConc">0</span></div>
+            <div class="result-label">Concentrate (<span id="currentUnit3">ml</span>)</div>
         </div>
     </div>
 
@@ -247,32 +280,56 @@
         calc();
     }
 
+    function updateUI() {
+        document.getElementById('clrTotal').classList.toggle('active', document.getElementById('totalVol').value !== '');
+        document.getElementById('clrRatio').classList.toggle('active', document.getElementById('ratioX').value !== '');
+        calc();
+    }
+
+    function clearInput(id) {
+        document.getElementById(id).value = '';
+        updateUI();
+    }
+
     function calc() {
         const total = parseFloat(document.getElementById('totalVol').value);
         const x = parseFloat(document.getElementById('ratioX').value);
         
         const resConc = document.getElementById('resConc');
         const resWater = document.getElementById('resWater');
+        const approxWater = document.getElementById('approxWater');
+        const approxConc = document.getElementById('approxConc');
 
         if (isNaN(total) || isNaN(x) || x <= 0 || total <= 0) {
             resConc.innerText = "0";
             resWater.innerText = "0";
+            approxWater.style.display = "none";
+            approxConc.style.display = "none";
             return;
         }
 
-        // Logic: Total / (1 + X)
-        // 1 part concentrate + X parts water = Total
         const concentrate = total / (1 + x);
         const water = total - concentrate;
 
-        resConc.innerText = formatNum(concentrate);
-        resWater.innerText = formatNum(water);
-    }
-
-    function formatNum(num) {
-        if (num >= 100) return Math.round(num);
-        if (num >= 10) return num.toFixed(1);
-        return num.toFixed(2);
+        // Display Logic
+        if (currentUnit === 'cups') {
+            // Cups require more precision
+            approxWater.style.display = "none";
+            approxConc.style.display = "none";
+            resConc.innerText = concentrate.toFixed(2);
+            resWater.innerText = water.toFixed(2);
+        } else if (currentUnit === 'gal') {
+            approxWater.style.display = "none";
+            approxConc.style.display = "none";
+            resConc.innerText = concentrate.toFixed(3);
+            resWater.innerText = water.toFixed(3);
+        } else {
+            // ML, OZ: Round to integer and show "Approx."
+            approxWater.style.display = "inline";
+            approxConc.style.display = "inline";
+            resConc.innerText = Math.round(concentrate);
+            resWater.innerText = Math.round(water);
+        }
     }
 
     function showModal() { document.getElementById('modal').style.display = 'flex'; }
