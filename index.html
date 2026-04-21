@@ -18,6 +18,7 @@
             --water: #3498db;
             --warning-bg: #fffbe6;
             --warning-border: #ffe58f;
+            --text-label: #555; /* 視認性向上のための濃いグレー */
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
@@ -57,43 +58,45 @@
             background: var(--accent);
             padding: 8px 14px;
             border-radius: 12px;
+            pointer-events: auto;
         }
 
-        .subtitle { font-size: 0.85rem; color: #999; font-weight: 700; margin-bottom: 20px; text-align: left; }
+        .subtitle { font-size: 0.9rem; color: #666; font-weight: 800; margin-bottom: 20px; text-align: left; }
 
         /* Full Width Selectors */
         .selector-box { display: flex; gap: 8px; margin-bottom: 12px; width: 100%; }
         .chip {
-            flex: 1; /* 横幅いっぱい使う */
-            padding: 12px 5px;
+            flex: 1;
+            padding: 14px 5px;
             background: var(--input-bg);
             border: 2px solid var(--accent);
             border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: 800;
+            font-size: 0.85rem;
+            font-weight: 900;
             cursor: pointer;
-            color: #999;
+            color: #777; /* 視認性向上 */
             text-align: center;
             white-space: nowrap;
         }
-        .chip.active { background: var(--main); color: #fff; border-color: var(--main); }
+        .chip.active { background: var(--main); color: #fff; border-color: var(--main); -webkit-text-fill-color: #fff; }
 
         /* Input Group */
         .input-group { text-align: left; margin-bottom: 15px; }
-        .label { font-size: 0.7rem; font-weight: 900; color: #bbb; margin-bottom: 5px; margin-left: 5px; text-transform: uppercase; }
+        .label { font-size: 0.8rem; font-weight: 900; color: var(--text-label); margin-bottom: 6px; margin-left: 5px; text-transform: uppercase; }
 
         .input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
         input {
-            width: 100%; padding: 18px; padding-right: 50px; border: 2px solid var(--accent);
-            border-radius: var(--radius); background: var(--input-bg); font-size: 1.4rem; font-weight: 800;
+            width: 100%; padding: 18px; padding-right: 55px; border: 2px solid var(--accent);
+            border-radius: var(--radius); background: var(--input-bg); font-size: 1.5rem; font-weight: 900;
             color: var(--main) !important; outline: none; -webkit-appearance: none;
             -webkit-text-fill-color: var(--main) !important; opacity: 1 !important;
         }
-        input::placeholder { color: #ccc; -webkit-text-fill-color: #ccc; }
+        input::placeholder { color: #ccc !important; -webkit-text-fill-color: #ccc !important; font-weight: 800; }
+        input:focus { border-color: var(--main); }
 
         .clr-btn {
-            position: absolute; right: 12px; width: 32px; height: 32px; background: #ccc;
-            border: none; border-radius: 50%; color: #fff; font-size: 1.2rem; font-weight: 900;
+            position: absolute; right: 12px; width: 34px; height: 34px; background: #ccc;
+            border: none; border-radius: 50%; color: #fff; font-size: 1.4rem; font-weight: 900;
             cursor: pointer; display: none; align-items: center; justify-content: center;
         }
         .clr-btn.active { display: flex; }
@@ -107,70 +110,70 @@
             width: 100%;
         }
         .q-btn {
-            padding: 12px 0;
+            padding: 14px 0;
             background: #f0f0f0;
             border-radius: 10px;
-            font-size: 1rem;
+            font-size: 1.1rem;
             font-weight: 900;
             color: var(--main);
-            border: none;
+            border: 1px solid #ddd;
             cursor: pointer;
         }
-        .q-btn:active { background: var(--accent); }
+        .q-btn:active { background: var(--accent); transform: scale(0.98); }
 
-        .ratio-visual { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 900; width: 100%; }
-        .ratio-fixed { color: #ddd; flex-shrink: 0; }
+        .ratio-visual { display: flex; align-items: center; gap: 10px; font-size: 1.6rem; font-weight: 900; width: 100%; }
+        .ratio-fixed { color: #bbb; flex-shrink: 0; }
 
         .tip-box {
-            background: var(--warning-bg); color: #888; font-size: 0.75rem; font-weight: 800;
+            background: var(--warning-bg); color: #777; font-size: 0.8rem; font-weight: 800;
             padding: 12px; border-radius: 12px; margin: 15px 0; border: 1px solid var(--warning-border); text-align: center;
         }
 
         /* Result Area */
         .result-container { display: grid; gap: 10px; margin-bottom: 15px; }
         .res-card {
-            background: var(--input-bg); border-radius: var(--radius); padding: 22px;
+            background: var(--input-bg); border-radius: var(--radius); padding: 25px;
             border: 2px solid var(--accent); text-align: center;
         }
-        .res-card.highlight { border-color: var(--main); }
-        .res-card.blue { border-color: var(--water); }
+        .res-card.highlight { border-color: var(--main); border-width: 3px; }
+        .res-card.blue { border-color: var(--water); border-width: 3px; }
         
-        .res-val { font-size: 2.2rem; font-weight: 900; line-height: 1; margin-bottom: 5px; }
+        .res-val { font-size: 2.6rem; font-weight: 900; line-height: 1; margin-bottom: 8px; }
         .res-card.blue .res-val { color: var(--water); }
-        .res-label { font-size: 0.75rem; font-weight: 900; color: #999; text-transform: uppercase; }
+        .res-label { font-size: 0.85rem; font-weight: 900; color: #555; text-transform: uppercase; }
 
-        .total-recap { font-size: 0.9rem; font-weight: 900; color: #bbb; text-align: center; margin-bottom: 15px; }
+        .total-recap { font-size: 1rem; font-weight: 900; color: #999; text-align: center; margin-bottom: 20px; }
 
-        /* Density Note - High Visibility Remake */
+        /* Density Note - Maximum Visibility */
         .density-note {
             background: var(--warning-bg);
-            padding: 15px;
+            padding: 18px;
             border-radius: var(--radius);
-            font-size: 0.8rem;
-            color: #666;
+            font-size: 0.85rem;
+            color: #444; /* より濃く */
             font-weight: 800;
             text-align: center;
             line-height: 1.5;
             border: 2px solid var(--warning-border);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
         /* Footer */
         .footer-btns { margin-top: auto; padding: 15px 0; text-align: center; }
         .kofi-btn {
             display: inline-flex; align-items: center; justify-content: center;
-            background: var(--main); color: #fff; width: 100%; max-width: 320px;
-            padding: 16px; border-radius: var(--radius);
-            text-decoration: none; font-weight: 900; font-size: 0.9rem; margin-bottom: 12px;
+            background: var(--main); color: #fff; width: 100%; max-width: 340px;
+            padding: 18px; border-radius: var(--radius);
+            text-decoration: none; font-weight: 900; font-size: 1rem; margin-bottom: 12px;
             -webkit-text-fill-color: #fff;
         }
         .home-btn {
-            display: block; width: 100%; max-width: 320px; margin: 0 auto; 
+            display: block; width: 100%; max-width: 340px; margin: 0 auto; 
             background: var(--accent); color: var(--main); border: none; 
-            padding: 12px; border-radius: var(--radius); font-weight: 800; font-size: 0.85rem; cursor: pointer;
+            padding: 14px; border-radius: var(--radius); font-weight: 800; font-size: 0.9rem; cursor: pointer;
         }
 
-        footer { padding: 15px 0; text-align: center; font-size: 0.7rem; color: #bbb; line-height: 1.6; font-weight: 600; }
+        footer { padding: 15px 0; text-align: center; font-size: 0.75rem; color: #999; line-height: 1.6; font-weight: 700; }
         footer a { color: inherit; text-decoration: underline; }
 
         /* Modal */
@@ -193,7 +196,7 @@
         <h1>MIX RATIO</h1>
         <a href="https://afrorakda.github.io/" class="hub-link">🏠 Hub</a>
     </header>
-    <p class="subtitle">Smart dilution for home & work.</p>
+    <p class="subtitle">Dilution guide for home & work.</p>
 
     <div class="selector-box">
         <div class="chip active" id="mode-total" onclick="setMode('total')">Make... (Total)</div>
@@ -250,7 +253,7 @@
     <div class="total-recap" id="totalRecap"></div>
 
     <div class="density-note">
-        ⚠️ <b>IMPORTANT:</b> Standard weight (1ml ≈ 1g) is used. Actual weight may vary by liquid density.
+        ⚠️ <b>IMPORTANT:</b> Standard weight (1ml ≈ 1g) is used. Actual results may vary by density.
     </div>
 
     <div class="footer-btns">
@@ -290,7 +293,6 @@
 
     function setUnit(unit, el) {
         currentUnit = unit;
-        // Reset only unit chips
         const unitChips = Array.from(document.querySelectorAll('.chip')).filter(c => !c.id.includes('mode'));
         unitChips.forEach(c => c.classList.remove('active'));
         el.classList.add('active');
