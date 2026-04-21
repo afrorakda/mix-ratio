@@ -16,6 +16,8 @@
             --input-bg: #fafafa;
             --radius: 15px;
             --water: #3498db;
+            --warning-bg: #fffbe6;
+            --warning-border: #ffe58f;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
@@ -59,21 +61,30 @@
 
         .subtitle { font-size: 0.85rem; color: #999; font-weight: 700; margin-bottom: 20px; text-align: left; }
 
-        /* Mode & Unit Selectors */
-        .selector-box { display: flex; gap: 8px; margin-bottom: 12px; overflow-x: auto; padding-bottom: 5px; }
+        /* Full Width Selectors */
+        .selector-box { display: flex; gap: 8px; margin-bottom: 12px; width: 100%; }
         .chip {
-            padding: 8px 14px; background: var(--input-bg); border: 2px solid var(--accent);
-            border-radius: 10px; font-size: 0.75rem; font-weight: 800; cursor: pointer; color: #999; white-space: nowrap;
+            flex: 1; /* 横幅いっぱい使う */
+            padding: 12px 5px;
+            background: var(--input-bg);
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            cursor: pointer;
+            color: #999;
+            text-align: center;
+            white-space: nowrap;
         }
         .chip.active { background: var(--main); color: #fff; border-color: var(--main); }
 
         /* Input Group */
-        .input-group { text-align: left; margin-bottom: 12px; }
+        .input-group { text-align: left; margin-bottom: 15px; }
         .label { font-size: 0.7rem; font-weight: 900; color: #bbb; margin-bottom: 5px; margin-left: 5px; text-transform: uppercase; }
 
         .input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
         input {
-            width: 100%; padding: 16px; border: 2px solid var(--accent);
+            width: 100%; padding: 18px; padding-right: 50px; border: 2px solid var(--accent);
             border-radius: var(--radius); background: var(--input-bg); font-size: 1.4rem; font-weight: 800;
             color: var(--main) !important; outline: none; -webkit-appearance: none;
             -webkit-text-fill-color: var(--main) !important; opacity: 1 !important;
@@ -81,17 +92,29 @@
         input::placeholder { color: #ccc; -webkit-text-fill-color: #ccc; }
 
         .clr-btn {
-            position: absolute; right: 12px; width: 30px; height: 30px; background: #ccc;
+            position: absolute; right: 12px; width: 32px; height: 32px; background: #ccc;
             border: none; border-radius: 50%; color: #fff; font-size: 1.2rem; font-weight: 900;
             cursor: pointer; display: none; align-items: center; justify-content: center;
         }
         .clr-btn.active { display: flex; }
 
-        /* Quick Ratio Buttons - Fractional Look */
-        .quick-row { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+        /* Quick Ratio Grid - Full Width */
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 10px;
+            width: 100%;
+        }
         .q-btn {
-            padding: 10px 14px; background: #f0f0f0; border-radius: 8px; font-size: 0.85rem;
-            font-weight: 900; color: #555; border: none; cursor: pointer;
+            padding: 12px 0;
+            background: #f0f0f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 900;
+            color: var(--main);
+            border: none;
+            cursor: pointer;
         }
         .q-btn:active { background: var(--accent); }
 
@@ -99,11 +122,11 @@
         .ratio-fixed { color: #ddd; flex-shrink: 0; }
 
         .tip-box {
-            background: #fffbe6; color: #888; font-size: 0.75rem; font-weight: 800;
-            padding: 12px; border-radius: 12px; margin: 15px 0; border: 1px solid #ffe58f; text-align: center;
+            background: var(--warning-bg); color: #888; font-size: 0.75rem; font-weight: 800;
+            padding: 12px; border-radius: 12px; margin: 15px 0; border: 1px solid var(--warning-border); text-align: center;
         }
 
-        /* Result Cards */
+        /* Result Area */
         .result-container { display: grid; gap: 10px; margin-bottom: 15px; }
         .res-card {
             background: var(--input-bg); border-radius: var(--radius); padding: 22px;
@@ -114,14 +137,22 @@
         
         .res-val { font-size: 2.2rem; font-weight: 900; line-height: 1; margin-bottom: 5px; }
         .res-card.blue .res-val { color: var(--water); }
-        .res-label { font-size: 0.7rem; font-weight: 900; color: #999; text-transform: uppercase; }
+        .res-label { font-size: 0.75rem; font-weight: 900; color: #999; text-transform: uppercase; }
 
         .total-recap { font-size: 0.9rem; font-weight: 900; color: #bbb; text-align: center; margin-bottom: 15px; }
 
-        /* Density Note - High Visibility */
+        /* Density Note - High Visibility Remake */
         .density-note {
-            background: #f9f9f9; padding: 12px; border-radius: 12px; font-size: 0.75rem;
-            color: #777; font-weight: 800; text-align: center; line-height: 1.4; border: 1px solid #eee;
+            background: var(--warning-bg);
+            padding: 15px;
+            border-radius: var(--radius);
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 800;
+            text-align: center;
+            line-height: 1.5;
+            border: 2px solid var(--warning-border);
+            margin-bottom: 10px;
         }
 
         /* Footer */
@@ -162,7 +193,7 @@
         <h1>MIX RATIO</h1>
         <a href="https://afrorakda.github.io/" class="hub-link">🏠 Hub</a>
     </header>
-    <p class="subtitle">Dilution guide for home & work.</p>
+    <p class="subtitle">Smart dilution for home & work.</p>
 
     <div class="selector-box">
         <div class="chip active" id="mode-total" onclick="setMode('total')">Make... (Total)</div>
@@ -193,7 +224,7 @@
                 <button class="clr-btn" id="clrRatio" onclick="clearInput('ratioX')">×</button>
             </div>
         </div>
-        <div class="quick-row">
+        <div class="quick-grid">
             <button class="q-btn" onclick="setRatio(2)">1/2</button>
             <button class="q-btn" onclick="setRatio(3)">1/3</button>
             <button class="q-btn" onclick="setRatio(5)">1/5</button>
@@ -219,7 +250,7 @@
     <div class="total-recap" id="totalRecap"></div>
 
     <div class="density-note">
-        ⚠️ <b>Note:</b> Standard weight (1ml ≈ 1g) used.<br>Actual weight may vary by liquid density.
+        ⚠️ <b>IMPORTANT:</b> Standard weight (1ml ≈ 1g) is used. Actual weight may vary by liquid density.
     </div>
 
     <div class="footer-btns">
@@ -259,7 +290,9 @@
 
     function setUnit(unit, el) {
         currentUnit = unit;
-        document.querySelectorAll('.chip').forEach(c => { if(!c.id.includes('mode')) c.classList.remove('active'); });
+        // Reset only unit chips
+        const unitChips = Array.from(document.querySelectorAll('.chip')).filter(c => !c.id.includes('mode'));
+        unitChips.forEach(c => c.classList.remove('active'));
         el.classList.add('active');
         document.querySelectorAll('.u-text').forEach(t => t.innerText = unit);
         setMode(currentMode);
