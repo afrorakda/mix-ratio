@@ -16,9 +16,7 @@
             --input-bg: #fafafa;
             --radius: 15px;
             --water: #3498db;
-            --warning-bg: #fffbe6;
-            --warning-border: #ffe58f;
-            --text-label: #555; /* 視認性向上のための濃いグレー */
+            --text-label: #555;
         }
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
@@ -58,12 +56,11 @@
             background: var(--accent);
             padding: 8px 14px;
             border-radius: 12px;
-            pointer-events: auto;
         }
 
         .subtitle { font-size: 0.9rem; color: #666; font-weight: 800; margin-bottom: 20px; text-align: left; }
 
-        /* Full Width Selectors */
+        /* Full Width Layout */
         .selector-box { display: flex; gap: 8px; margin-bottom: 12px; width: 100%; }
         .chip {
             flex: 1;
@@ -74,13 +71,12 @@
             font-size: 0.85rem;
             font-weight: 900;
             cursor: pointer;
-            color: #777; /* 視認性向上 */
+            color: #777;
             text-align: center;
             white-space: nowrap;
         }
         .chip.active { background: var(--main); color: #fff; border-color: var(--main); -webkit-text-fill-color: #fff; }
 
-        /* Input Group */
         .input-group { text-align: left; margin-bottom: 15px; }
         .label { font-size: 0.8rem; font-weight: 900; color: var(--text-label); margin-bottom: 6px; margin-left: 5px; text-transform: uppercase; }
 
@@ -101,7 +97,6 @@
         }
         .clr-btn.active { display: flex; }
 
-        /* Quick Ratio Grid - Full Width */
         .quick-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -125,11 +120,11 @@
         .ratio-fixed { color: #bbb; flex-shrink: 0; }
 
         .tip-box {
-            background: var(--warning-bg); color: #777; font-size: 0.8rem; font-weight: 800;
-            padding: 12px; border-radius: 12px; margin: 15px 0; border: 1px solid var(--warning-border); text-align: center;
+            background: #fffbe6; color: #777; font-size: 0.8rem; font-weight: 800;
+            padding: 12px; border-radius: 12px; margin: 15px 0; border: 1px solid #ffe58f; text-align: center;
         }
 
-        /* Result Area */
+        /* Result Cards */
         .result-container { display: grid; gap: 10px; margin-bottom: 15px; }
         .res-card {
             background: var(--input-bg); border-radius: var(--radius); padding: 25px;
@@ -144,17 +139,16 @@
 
         .total-recap { font-size: 1rem; font-weight: 900; color: #999; text-align: center; margin-bottom: 20px; }
 
-        /* Density Note - Maximum Visibility */
         .density-note {
-            background: var(--warning-bg);
-            padding: 18px;
+            background: #f9f9f9;
+            padding: 15px;
             border-radius: var(--radius);
-            font-size: 0.85rem;
-            color: #444; /* より濃く */
+            font-size: 0.8rem;
+            color: #666;
             font-weight: 800;
             text-align: center;
             line-height: 1.5;
-            border: 2px solid var(--warning-border);
+            border: 1px solid #eee;
             margin-bottom: 15px;
         }
 
@@ -196,7 +190,7 @@
         <h1>MIX RATIO</h1>
         <a href="https://afrorakda.github.io/" class="hub-link">🏠 Hub</a>
     </header>
-    <p class="subtitle">Dilution guide for home & work.</p>
+    <p class="subtitle">Smart dilution for home & work.</p>
 
     <div class="selector-box">
         <div class="chip active" id="mode-total" onclick="setMode('total')">Make... (Total)</div>
@@ -253,7 +247,7 @@
     <div class="total-recap" id="totalRecap"></div>
 
     <div class="density-note">
-        ⚠️ <b>IMPORTANT:</b> Standard weight (1ml ≈ 1g) is used. Actual results may vary by density.
+        ⚠️ <b>Note:</b> Standard weight (1ml ≈ 1g) is used. Actual results may vary by density.
     </div>
 
     <div class="footer-btns">
@@ -293,8 +287,8 @@
 
     function setUnit(unit, el) {
         currentUnit = unit;
-        const unitChips = Array.from(document.querySelectorAll('.chip')).filter(c => !c.id.includes('mode'));
-        unitChips.forEach(c => c.classList.remove('active'));
+        const chips = Array.from(document.querySelectorAll('.chip')).filter(c => !c.id.includes('mode'));
+        chips.forEach(c => c.classList.remove('active'));
         el.classList.add('active');
         document.querySelectorAll('.u-text').forEach(t => t.innerText = unit);
         setMode(currentMode);
