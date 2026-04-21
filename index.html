@@ -59,104 +59,55 @@
 
         .subtitle { font-size: 0.85rem; color: #999; font-weight: 700; margin-bottom: 20px; text-align: left; }
 
+        /* Selectors */
         .selector-box { display: flex; gap: 8px; margin-bottom: 12px; overflow-x: auto; padding-bottom: 5px; }
         .chip {
-            padding: 8px 14px;
-            background: var(--input-bg);
-            border: 2px solid var(--accent);
-            border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: 800;
-            cursor: pointer;
-            color: #999;
-            white-space: nowrap;
+            padding: 8px 14px; background: var(--input-bg); border: 2px solid var(--accent);
+            border-radius: 10px; font-size: 0.75rem; font-weight: 800; cursor: pointer; color: #999; white-space: nowrap;
         }
         .chip.active { background: var(--main); color: #fff; border-color: var(--main); }
 
         /* Input Group */
         .input-group { text-align: left; margin-bottom: 12px; }
-        .label {
-            font-size: 0.7rem;
-            font-weight: 900;
-            color: #bbb;
-            margin-bottom: 5px;
-            margin-left: 5px;
-            text-transform: uppercase;
-        }
+        .label { font-size: 0.7rem; font-weight: 900; color: #bbb; margin-bottom: 5px; margin-left: 5px; text-transform: uppercase; }
 
         .input-wrapper { position: relative; display: flex; align-items: center; width: 100%; }
         input {
-            width: 100%;
-            padding: 16px;
-            padding-right: 50px;
-            border: 2px solid var(--accent);
-            border-radius: var(--radius);
-            background: var(--input-bg);
-            font-size: 1.4rem;
-            font-weight: 800;
-            color: var(--main) !important;
-            outline: none;
-            -webkit-appearance: none;
-            -webkit-text-fill-color: var(--main) !important;
-            opacity: 1 !important;
+            width: 100%; padding: 16px; padding-right: 50px; border: 2px solid var(--accent);
+            border-radius: var(--radius); background: var(--input-bg); font-size: 1.4rem; font-weight: 800;
+            color: var(--main) !important; outline: none; -webkit-appearance: none;
+            -webkit-text-fill-color: var(--main) !important; opacity: 1 !important;
         }
         input::placeholder { color: #ccc; -webkit-text-fill-color: #ccc; }
 
         .clr-btn {
-            position: absolute;
-            right: 12px;
-            width: 30px;
-            height: 30px;
-            background: #ccc;
-            border: none;
-            border-radius: 50%;
-            color: #fff;
-            font-size: 1.2rem;
-            font-weight: 900;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
+            position: absolute; right: 12px; width: 30px; height: 30px; background: #ccc;
+            border: none; border-radius: 50%; color: #fff; font-size: 1.2rem; font-weight: 900;
+            cursor: pointer; display: none; align-items: center; justify-content: center;
         }
         .clr-btn.active { display: flex; }
 
         /* Quick Ratio Buttons */
         .quick-row { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
         .q-btn {
-            padding: 6px 10px;
-            background: #f0f0f0;
-            border-radius: 8px;
-            font-size: 0.7rem;
-            font-weight: 800;
-            color: #777;
-            border: none;
-            cursor: pointer;
+            padding: 8px 12px; background: #f0f0f0; border-radius: 8px; font-size: 0.8rem;
+            font-weight: 900; color: #555; border: none; cursor: pointer;
         }
+        .q-btn:active { background: var(--accent); }
 
         .ratio-visual { display: flex; align-items: center; gap: 10px; font-size: 1.5rem; font-weight: 900; width: 100%; }
         .ratio-fixed { color: #ddd; flex-shrink: 0; }
 
         .tip-box {
-            background: #fffbe6;
-            color: #888;
-            font-size: 0.75rem;
-            font-weight: 800;
-            padding: 12px;
-            border-radius: 12px;
-            margin: 15px 0;
-            border: 1px solid #ffe58f;
-            text-align: center;
+            background: #fffbe6; color: #888; font-size: 0.75rem; font-weight: 800;
+            padding: 12px; border-radius: 12px; margin: 15px 0; border: 1px solid #ffe58f; text-align: center;
         }
 
         /* Result Area */
-        .result-container { display: grid; gap: 10px; margin-bottom: 20px; }
+        .result-container { display: grid; gap: 10px; margin-bottom: 15px; }
         .res-card {
-            background: var(--input-bg);
-            border-radius: var(--radius);
-            padding: 20px;
-            border: 2px solid var(--accent);
-            text-align: center;
-            position: relative;
+            background: var(--input-bg); border-radius: var(--radius); padding: 20px;
+            border: 2px solid var(--accent); text-align: center; position: relative;
         }
         .res-card.highlight { border-color: var(--main); }
         .res-card.blue { border-color: var(--water); }
@@ -165,12 +116,12 @@
         .res-card.blue .res-val { color: var(--water); }
         .res-label { font-size: 0.7rem; font-weight: 900; color: #999; text-transform: uppercase; }
 
+        .total-recap { font-size: 0.8rem; font-weight: 800; color: #bbb; text-align: center; margin-bottom: 15px; }
+
+        /* Density Note - High Visibility */
         .density-note {
-            font-size: 0.6rem;
-            color: #bbb;
-            font-weight: 600;
-            margin-top: 10px;
-            text-align: center;
+            background: #f9f9f9; padding: 10px; border-radius: 10px; font-size: 0.7rem;
+            color: #777; font-weight: 800; text-align: center; line-height: 1.4;
         }
 
         /* Footer */
@@ -242,18 +193,16 @@
             </div>
         </div>
         <div class="quick-row">
-            <button class="q-btn" onclick="setRatio(2)">1:2</button>
-            <button class="q-btn" onclick="setRatio(3)">1:3</button>
-            <button class="q-btn" onclick="setRatio(5)">1:5</button>
-            <button class="q-btn" onclick="setRatio(10)">1:10</button>
-            <button class="q-btn" onclick="setRatio(50)">1:50</button>
-            <button class="q-btn" onclick="setRatio(100)">1:100</button>
+            <button class="q-btn" onclick="setRatio(2)">1/2</button>
+            <button class="q-btn" onclick="setRatio(3)">1/3</button>
+            <button class="q-btn" onclick="setRatio(5)">1/5</button>
+            <button class="q-btn" onclick="setRatio(10)">1/10</button>
+            <button class="q-btn" onclick="setRatio(50)">1/50</button>
+            <button class="q-btn" onclick="setRatio(100)">1/100</button>
         </div>
     </div>
 
-    <div class="tip-box">
-        💡 Add water first for less foam.
-    </div>
+    <div class="tip-box">💡 Add water first for less foam.</div>
 
     <div class="result-container">
         <div class="res-card blue">
@@ -266,7 +215,11 @@
         </div>
     </div>
 
-    <div class="density-note">*Standard weight (1ml ≈ 1g) used. Actual results may vary by density.</div>
+    <div class="total-recap" id="totalRecap"></div>
+
+    <div class="density-note">
+        ⚠️ <b>Note:</b> Standard weight (1ml ≈ 1g) used.<br>Actual weight may vary by liquid density.
+    </div>
 
     <div class="footer-btns">
         <a href="https://ko-fi.com/afrorakda" target="_blank" class="kofi-btn">☕️buy me a coffee</a>
@@ -283,7 +236,6 @@
     <div class="modal-content" onclick="event.stopPropagation()">
         <span class="close-x" onclick="hideModal()">×</span>
         <h3 style="margin-bottom: 10px; font-weight: 900;">📱 Install</h3>
-        <p style="margin-bottom: 20px; color: #999; font-weight: 700; font-size: 0.85rem;">Add to your home screen.</p>
         <div style="font-size: 0.9rem; line-height: 1.6; font-weight: 700;">
             <p>🍏 <strong>iPhone:</strong><br>Share > Add to Home Screen</p>
             <p style="margin-top:10px;">🤖 <strong>Android:</strong><br>Menu (⋮) > Add to Home Screen</p>
@@ -316,6 +268,8 @@
     function setRatio(val) {
         document.getElementById('ratioX').value = val;
         updateUI();
+        // Close keyboard for better view
+        document.querySelectorAll('input').forEach(i => i.blur());
     }
 
     function updateUI() {
@@ -340,7 +294,6 @@
         else if (fraction >= 0.4) fStr = "1/2";
         else if (fraction >= 0.3) fStr = "1/3";
         else if (fraction >= 0.15) fStr = "1/4";
-        
         if (integer === 0) return fStr || "0";
         return fStr ? `${integer} ${fStr}` : integer.toString();
     }
@@ -350,29 +303,37 @@
         const x = parseFloat(document.getElementById('ratioX').value);
         const resConc = document.getElementById('resConc');
         const resWater = document.getElementById('resWater');
+        const recap = document.getElementById('totalRecap');
 
         if (isNaN(inputVal) || isNaN(x) || x < 0 || inputVal <= 0) {
-            resConc.innerText = "--"; resWater.innerText = "--"; return;
+            resConc.innerText = "--"; resWater.innerText = "--"; recap.innerText = ""; return;
         }
 
-        let concentrate, water;
+        let concentrate, water, total;
         if (currentMode === 'total') {
             concentrate = inputVal / (1 + x);
             water = inputVal - concentrate;
+            total = inputVal;
         } else {
             concentrate = inputVal;
             water = inputVal * x;
+            total = concentrate + water;
         }
 
+        let unitLabel = currentUnit === 'ml/g' ? 'ml/g' : currentUnit;
+        
         if (currentUnit === 'cups') {
             resConc.innerText = formatCup(concentrate);
             resWater.innerText = formatCup(water);
+            recap.innerText = `Total: ${formatCup(total)} ${unitLabel}`;
         } else if (currentUnit === 'gal' || currentUnit === 'oz') {
             resConc.innerText = concentrate.toFixed(1);
             resWater.innerText = water.toFixed(1);
+            recap.innerText = `Total: ${total.toFixed(1)} ${unitLabel}`;
         } else {
             resConc.innerText = Math.round(concentrate);
             resWater.innerText = Math.round(water);
+            recap.innerText = `Total: ${Math.round(total)} ${unitLabel}`;
         }
     }
 
